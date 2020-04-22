@@ -1,0 +1,14 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+
+{% block branding %}
+{% endblock %}
+{% block extrahead %}
+    <style type="text/css">
+        #branding #header-logo{
+                display: None;  // here you remove the django image
+
+        }
+    </style>
+{% endblock %}
