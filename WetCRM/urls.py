@@ -21,5 +21,5 @@ admin.site.site_title = "WetSystem"
 admin.site.index_title = "WetSystem"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
 ]

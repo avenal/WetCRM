@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth import get_user_model
 
 class Patient(models.Model):
     name = models.CharField("Imię", max_length=63)
@@ -33,6 +34,8 @@ class Visit(models.Model):
     visit_type = models.ForeignKey(VisitType, on_delete=models.DO_NOTHING, verbose_name="Typ wizyty")
     date = models.DateTimeField("Data", blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.DO_NOTHING, verbose_name="Pacjent")
+    wet = models.ForeignKey(get_user_model(), on_delete=models.DO_NOTHING, verbose_name="Lekarz")
+
     class Meta:
         verbose_name = 'Wizyta'
         verbose_name_plural = 'Wizyty'
@@ -51,6 +54,8 @@ class Prescription(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.DO_NOTHING, verbose_name="Pacjent")
     medications = models.ManyToManyField(MedicationDetailed, verbose_name="Leki")
     created_at = models.DateTimeField("Data utworzenia", default=datetime.now)
+    wet = models.ForeignKey(get_user_model(), on_delete=models.DO_NOTHING, verbose_name="Lekarz")
+    
     def __str__(self):
         return f"{self.patient}, {self.created_at}"
     class Meta:
